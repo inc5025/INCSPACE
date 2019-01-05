@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Post = require("../models/post");
 var Counter = require("../models/counter");
-var App = require("../app");
 
 router.post('/', (req, res) => {
     Counter.increment("post_id", function(err, result){
@@ -13,7 +12,6 @@ router.post('/', (req, res) => {
                 content: req.body.content
             });
             
-            console.log(result);
             post.save((err) => {
                 if(err){
                     console.error(err);
