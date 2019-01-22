@@ -9,7 +9,9 @@ router.post('/', (req, res) => {
             var post = new Post({
                 post_id: result.value,
                 title: req.body.title,
-                content: req.body.content
+                content: req.body.content,
+                category: req.body.category,
+                subgroup: req.body.subgroup
             });
             
             post.save((err) => {
@@ -51,6 +53,8 @@ router.put('/:id', (req, res) => {
         if(req.body.title)  post.title = req.body.title;
         if(req.body.content) post.content = req.body.content;
         if(req.body.post_id) post.post_id = req.body.post_id;
+        if(req.body.subgroup) post.subgroup = req.body.subgroup;
+        if(req.body.category) post.category = req.body.category;
         
         post.save(function(err){
             if(err) return res.status(500).json({error: 'failed to update'});

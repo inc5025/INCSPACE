@@ -5,11 +5,14 @@
   "author": "Jaehyeok Choi <wogur5025@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --host 0.0.0.0 --disableHostCheck true --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "jquery": "^3.3.1",
+    "mdbootstrap": "^4.6.1",
+    "mdbvue": "^4.10.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

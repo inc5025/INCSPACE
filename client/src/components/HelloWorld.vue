@@ -1,94 +1,86 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div class="container">
+        <!-- Section: Blog v.3 -->
+    <section class="my-4">
+    
+      <!-- Section heading -->
+      <h2 class="my-5"></h2>
+      <!-- Section description -->
+    
+      <!-- Grid row -->
+      <div class="row">
+    
+        <div class="col-lg-1 col-xl-1"></div>
+    
+        <!-- Grid column -->
+        <div class="col-lg-10 col-xl-10">
+    
+          <h5>
+            <a href="#" class="badge green">Dev</a>
+            <a href="#" class="badge badge-default">incspace</a>
+          </h5>
+          <!-- Post title -->
+          <h1 class="font-weight-bold mb-3"><strong>incspace postmotem</strong></h1>
+          <!-- Post data -->
+          <p>2019. 1. 21</p>
+    
+          <hr>
+        </div>
+        <!-- Grid column -->
+        
+        <div class="col-lg-1 col-xl-1"></div>
+        
+      </div>
+    
+    </section>
+    <!-- Section: Blog v.3 -->
+    <section>
+      <div class="row">
+    
+        <div class="col-lg-1 col-xl-1"></div>
+    
+        <!-- Grid column -->
+        <div class="col-lg-10 col-xl-10">
+          <div id="markdowneditor">
+            <textarea :value="input" @input="update"></textarea>
+            <button v-on:click="logging">log</button>
+            <div v-html="compiledMarkdown"></div>
+          </div>
+    
+          <hr class="my-5">
+        </div>
+        <!-- Grid column -->
+        
+        <div class="col-lg-1 col-xl-1"></div>
+        
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+import _ from 'lodash';
+import marked from 'marked';
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      input: '# hello'
+    }
+  },
+  computed: {
+    compiledMarkdown() {
+      return marked(this.input, { sanitize: true });
+    }
+  },
+  methods: {
+    update: _.debounce(function(e) {
+      this.input = e.target.value;
+    }, 300),
+    logging: function(e){
+      console.log(marked(this.input, { sanitize: true }));
     }
   }
 }
@@ -96,8 +88,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.container{
+  text-align: left;
+}
+
 h1, h2 {
-  font-weight: normal;
+  font-weight: bold;
+}
+p{
+  color: red;
 }
 ul {
   list-style-type: none;
