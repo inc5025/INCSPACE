@@ -11,6 +11,11 @@ import router from './router';
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
+Vue.prototype.$eventBus = new Vue({
+  data: {
+    pageNumber: 1
+  }
+});
 
 Vue.filter('Date_YMD', function(value) {
   if (value) {

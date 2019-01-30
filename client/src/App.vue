@@ -2,21 +2,25 @@
   <div id="app">
     <div class="container">
       <mdb-navbar dark class="indigo">
-        <mdb-navbar-brand class="title h1" href="#">incspace</mdb-navbar-brand>
+        <mdb-navbar-brand class="title h1 white-text">
+          <router-link :to="{ name: 'PostList' }" class="white-text">incspace</router-link>
+        </mdb-navbar-brand>
         <mdb-navbar-toggler>
           <mdb-navbar-nav>
-            <mdb-nav-item href="#" active>Blog</mdb-nav-item>
-            <mdb-nav-item href="#" active>Storage</mdb-nav-item>
-            <mdb-nav-item href="#" active>About</mdb-nav-item>
+            <mdb-nav-item>
+              <router-link :to="{ name: 'PostList' }" class="white-text">Blog</router-link>
+            </mdb-nav-item>
+            <mdb-nav-item href="" class="disabled">Storage</mdb-nav-item>
+            <mdb-nav-item href="" class="disabled">About</mdb-nav-item>
           </mdb-navbar-nav>
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link">
+              <a class="nav-link" disabled>
                 <i class="fa fa-github iicon" aria-hidden="true"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link">
+              <a class="nav-link" disabled>
                 <i class="fa fa-facebook-square iicon" aria-hidden="true"></i>
               </a>
             </li>
@@ -24,9 +28,8 @@
         </mdb-navbar-toggler>
       </mdb-navbar>
     </div>
-    
     <router-view/>
-    
+    <!--
     <div class="container">
       <footer class="page-footer font-small indigo pt-4">
         <div class="container-fluid text-center text-md-left indigo">
@@ -48,6 +51,7 @@
         </div>
       </footer>
     </div>
+    -->
   </div>
 </template>
 
@@ -62,6 +66,11 @@ export default {
     mdbNavbarNav,
     mdbNavbarToggler,
     mdbNavbarBrand
+  },
+  method: {
+    moveBlog: function(){
+      this.$router.push({name : 'PostList'});
+    }
   }
 }
 </script>
@@ -79,5 +88,41 @@ export default {
 
 .iicon{
   font-size: 1.4em;
+}
+</style>
+
+<style>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .4s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
+.loading-position-center{
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
+}
+
+.badge-dev{
+  color: #fff;
+  background-color: #00C851;
+}
+
+.badge-thought{
+  color: #fff;
+  background-color: #795548;
+}
+
+.badge-lifelog{
+  color: #fff;
+  background-color: #FF8800;
+}
+
+.badge-study{
+  color: #fff;
+  background-color: #aa66cc;
 }
 </style>

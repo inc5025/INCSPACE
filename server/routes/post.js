@@ -8,10 +8,11 @@ router.post('/', (req, res) => {
         if(!err){
             var post = new Post({
                 post_id: result.value,
+                
                 title: req.body.title,
-                content: req.body.content,
-                category: req.body.category,
-                subgroup: req.body.subgroup
+                tag: req.body.tag,
+                desc: req.body.desc,
+                content: req.body.content
             });
             
             post.save((err) => {
@@ -50,11 +51,11 @@ router.put('/:id', (req, res) => {
         if(err) return res.status(500).json({ error: 'database failure' });
         if(!post) return res.status(404).json({ error: 'post not found' });
 
-        if(req.body.title)  post.title = req.body.title;
-        if(req.body.content) post.content = req.body.content;
-        if(req.body.post_id) post.post_id = req.body.post_id;
-        if(req.body.subgroup) post.subgroup = req.body.subgroup;
-        if(req.body.category) post.category = req.body.category;
+        if(req.body.post_id)    post.post_id = req.body.post_id;
+        if(req.body.title)      post.title = req.body.title;
+        if(req.body.tag)        post.tag = req.body.tag;
+        if(req.body.desc)       post.desc = req.body.desc;
+        if(req.body.content)    post.content = req.body.content;
         
         post.save(function(err){
             if(err) return res.status(500).json({error: 'failed to update'});

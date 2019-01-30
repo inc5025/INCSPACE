@@ -42,7 +42,7 @@
         <!-- Grid column -->
         <div class="col-lg-10 col-xl-10">
           <div id="markdowneditor">
-            <textarea :value="input" @input="update"></textarea>
+            <textarea :value="input" @input="update" class="form-control md-textarea" rows="5"></textarea>
             <button v-on:click="logging">log</button>
             <div v-html="compiledMarkdown"></div>
           </div>
@@ -94,9 +94,6 @@ export default {
 
 h1, h2 {
   font-weight: bold;
-}
-p{
-  color: red;
 }
 ul {
   list-style-type: none;
