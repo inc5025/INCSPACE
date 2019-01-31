@@ -3,12 +3,12 @@
     <div class="container">
       <mdb-navbar dark class="indigo">
         <mdb-navbar-brand class="title h1 white-text">
-          <router-link :to="{ name: 'PostList' }" class="white-text">incspace</router-link>
+          <router-link :to="{ name: 'PostList' }" class="white-text">Devinc.cc</router-link>
         </mdb-navbar-brand>
         <mdb-navbar-toggler>
           <mdb-navbar-nav>
             <mdb-nav-item>
-              <router-link :to="{ name: 'PostList' }" class="white-text">Blog</router-link>
+              <router-link :to="{ name: 'PostList' }" v-on:click="resetPageNumber" class="white-text">Blog</router-link>
             </mdb-nav-item>
             <mdb-nav-item href="" class="disabled">Storage</mdb-nav-item>
             <mdb-nav-item href="" class="disabled">About</mdb-nav-item>
@@ -28,7 +28,10 @@
         </mdb-navbar-toggler>
       </mdb-navbar>
     </div>
-    <router-view/>
+    <keep-alive :include="['PostList', 'NotFound']">
+      <router-view/>
+    </keep-alive>
+    
     <!--
     <div class="container">
       <footer class="page-footer font-small indigo pt-4">
@@ -68,8 +71,9 @@ export default {
     mdbNavbarBrand
   },
   method: {
-    moveBlog: function(){
-      this.$router.push({name : 'PostList'});
+    resetPageNumber: () => {
+      this.$store.commit('setPageNumber', 1);
+      console.log(this.$store.state.pageNumber);
     }
   }
 }

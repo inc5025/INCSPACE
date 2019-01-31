@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
+import Vuex from 'vuex';
 import 'bootstrap-css-only/css/bootstrap.min.css'; 
 import 'mdbvue/build/css/mdb.css';
 
@@ -11,9 +12,14 @@ import router from './router';
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
-Vue.prototype.$eventBus = new Vue({
-  data: {
+
+Vue.use(Vuex);
+const store = new Vuex.Store({
+  state: {
     pageNumber: 1
+  },
+  mutations: {
+    setPageNumber : (state, n) => state.pageNumber = n
   }
 });
 
@@ -33,6 +39,7 @@ Vue.filter('Date_YMDHM', function(value) {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 });

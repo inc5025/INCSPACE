@@ -55,10 +55,7 @@
 export default {
   name: 'PostList',
     created(){
-      console.log(this.$eventBus.pageNumber);
-      
       this.$http.get('/post')
-      .then(this.pageNumber = this.$eventBus.pageNumber)
       .then((res)=>{
           this.posts = res.data.reverse();
           this.loading = true;
@@ -91,12 +88,14 @@ export default {
       nextPage(){
         window.scrollTo(0,0);
         this.pageNumber++;
-        this.$eventBus.pageNumber = this.pageNumber;
+        this.$store.commit('setPageNumber', this.pageNumber);
+        console.log(this.$store.state.pageNumber);
       },
       prevPage(){
         window.scrollTo(0,0);
         this.pageNumber--;
-        this.$eventBus.pageNumber = this.pageNumber;
+        this.$store.commit('setPageNumber', this.pageNumber);
+        console.log(this.$store.state.pageNumber);
       }
     },
     computed:{
@@ -110,6 +109,11 @@ export default {
         const start = (this.pageNumber - 1) * this.listSize,
               end = start + this.listSize;
         return this.posts.slice(start, end);
+      }
+    },
+    watch:{
+      checked(){
+        this.pageNumber = this.$store.state.pageNumber;
       }
     }
 };
