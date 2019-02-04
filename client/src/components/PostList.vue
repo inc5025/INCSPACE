@@ -87,15 +87,13 @@ export default {
       },
       nextPage(){
         window.scrollTo(0,0);
-        this.pageNumber++;
-        this.$store.commit('setPageNumber', this.pageNumber);
-        console.log(this.$store.state.pageNumber);
+        //this.pageNumber++;
+        this.$store.commit('setPageNumber', this.pageNumber + 1);
       },
       prevPage(){
         window.scrollTo(0,0);
-        this.pageNumber--;
-        this.$store.commit('setPageNumber', this.pageNumber);
-        console.log(this.$store.state.pageNumber);
+        //this.pageNumber--;
+        this.$store.commit('setPageNumber', this.pageNumber - 1);
       }
     },
     computed:{
@@ -112,8 +110,8 @@ export default {
       }
     },
     watch:{
-      checked(){
-        this.pageNumber = this.$store.state.pageNumber;
+      '$store.state.pageNumber': function(val) {
+        this.pageNumber = val;
       }
     }
 };

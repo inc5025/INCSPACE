@@ -3,12 +3,12 @@
     <div class="container">
       <mdb-navbar dark class="indigo">
         <mdb-navbar-brand class="title h1 white-text">
-          <router-link :to="{ name: 'PostList' }" class="white-text">Devinc.cc</router-link>
+          <a v-on:click="setPageNumber(1)" class="white-text">devinc.cc</a>
         </mdb-navbar-brand>
         <mdb-navbar-toggler>
           <mdb-navbar-nav>
             <mdb-nav-item>
-              <router-link :to="{ name: 'PostList' }" v-on:click="resetPageNumber" class="white-text">Blog</router-link>
+              <a v-on:click="setPageNumber(1)" class="white-text">Blog</a>
             </mdb-nav-item>
             <mdb-nav-item href="" class="disabled">Storage</mdb-nav-item>
             <mdb-nav-item href="" class="disabled">About</mdb-nav-item>
@@ -70,10 +70,10 @@ export default {
     mdbNavbarToggler,
     mdbNavbarBrand
   },
-  method: {
-    resetPageNumber: () => {
-      this.$store.commit('setPageNumber', 1);
-      console.log(this.$store.state.pageNumber);
+  methods: {
+    setPageNumber: function(num) {
+      this.$store.commit('setPageNumber', num);
+      this.$router.push({name : 'PostList'});
     }
   }
 }
