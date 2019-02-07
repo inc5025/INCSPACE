@@ -8,6 +8,7 @@ var mongoose = require("mongoose");
 
 var indexRouter = require('./routes/index');
 var postRouter = require("./routes/post");
+var authRouter = require("./routes/auth");
 
 var app = express();
 app.use(require('connect-history-api-fallback')());
@@ -16,7 +17,7 @@ app.use(require('connect-history-api-fallback')());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-//app.options('*', cors());
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/post', postRouter);
+app.use('/auth', authRouter);
 
 var db = mongoose.connection;
 db.on('error', console.error);
