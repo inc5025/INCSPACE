@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../../models/user')
 
 /*
-    POST /api/auth/register
+    POST /auth/register
     {
         username,
         password
@@ -34,7 +34,9 @@ exports.register = (req, res) => {
             return newUser.assignAdmin()
         } else {
             // if not, return a promise that returns false
-            return Promise.resolve(false)
+            //return Promise.resolve(false)
+            
+            throw new Error('only one, not two');
         }
     }
 
@@ -63,7 +65,7 @@ exports.register = (req, res) => {
 }
 
 /*
-    POST /api/auth/login
+    POST /auth/login
     {
         username,
         password
@@ -131,7 +133,7 @@ exports.login = (req, res) => {
 }
 
 /*
-    GET /api/auth/check
+    GET /auth/check
 */
 
 exports.check = (req, res) => {

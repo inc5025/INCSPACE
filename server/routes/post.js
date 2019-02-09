@@ -2,8 +2,29 @@ var express = require('express');
 var router = express.Router();
 var Post = require("../models/post");
 var Counter = require("../models/counter");
+const jwt = require('jsonwebtoken')
+
+const auth = (req, res) => {
+    // read the token from header or url 
+    const token = req.headers['x-access-token'] || req.query.token;
+    var ret = true;
+    // token does not exist
+    if(!token) {
+        return false;
+    }
+
+    jwt.verify(token, req.app.get('jwt-secret'), (err, decoded) => {
+        if(err) ret = false;
+    })
+
+    return ret;
+}
 
 router.post('/', (req, res) => {
+    if(!auth(req, res)){
+        return res.status(401).json({ error: 'Unauthenticated' });
+    }
+    
     Counter.increment("post_id", function(err, result){
         if(!err){
             var post = new Post({
@@ -47,6 +68,10 @@ router.get('/:id', (req, res) => {
 });
  
 router.put('/:id', (req, res) => {
+    if(!auth(req, res)){
+        return res.status(401).json({ error: 'Unauthenticated' });
+    }
+    
     Post.findOne({post_id: req.params.id}, (err, post) => {
         if(err) return res.status(500).json({ error: 'database failure' });
         if(!post) return res.status(404).json({ error: 'post not found' });
@@ -66,6 +91,10 @@ router.put('/:id', (req, res) => {
 });
  
 router.delete('/:id', (req, res) => {
+    if(!auth(req, res)){
+        return res.status(401).json({ error: 'Unauthenticated' });
+    }
+    
     Post.remove({post_id: req.params.id}, (err, output) => {
         if(err) return res.status(500).json({error: 'database failure'});
         

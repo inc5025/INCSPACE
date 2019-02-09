@@ -5,9 +5,15 @@ import PostView from '@/components/PostView'
 import WritePost from '@/components/WritePost'
 import EditPost from '@/components/EditPost'
 import NotFound from '@/components/NotFound'
-
+import LoginPage from '@/components/LoginPage'
+import store from '../store'
 
 Vue.use(Router)
+
+const requireAuth = () => (to, from, next) => {
+  if (store.getters.isAuthenticated) return next()
+  next('/login')
+}
 
 export default new Router({
   mode : 'history',
@@ -18,6 +24,11 @@ export default new Router({
       component: PostList
     },
     {
+      path: '/login',
+      name: 'LoginPage',
+      component: LoginPage
+    },
+    {
       path: '/NotFound',
       name: 'NotFound',
       component: NotFound
@@ -25,12 +36,14 @@ export default new Router({
     {
       path: '/write',
       name: 'WritePost',
-      component: WritePost
+      component: WritePost,
+      beforeEnter: requireAuth()
     },
     {
       path: '/edit/:id',
       name: 'EditPost',
-      component: EditPost
+      component: EditPost,
+      beforeEnter: requireAuth()
     },
     {
       path: '/:id',

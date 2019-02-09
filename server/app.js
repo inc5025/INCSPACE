@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 var mongoose = require("mongoose");
 
+const config = require('./config');
 var indexRouter = require('./routes/index');
 var postRouter = require("./routes/post");
 var authRouter = require("./routes/auth");
@@ -19,6 +20,7 @@ app.set('view engine', 'pug');
 
 app.use(cors());
 
+app.set('jwt-secret', config.secret);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

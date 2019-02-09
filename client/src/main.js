@@ -9,6 +9,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import App from './App';
 import router from './router';
+import authStore from  './store'
 
 Vue.config.productionTip = false;
 Vue.prototype.$http = axios;
@@ -16,7 +17,7 @@ Vue.prototype.$http = axios;
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
-    pageNumber: 1
+    pageNumber: 1,
   },
   mutations: {
     setPageNumber : (state, n) => state.pageNumber = n
@@ -40,6 +41,7 @@ new Vue({
   el: '#app',
   router,
   store,
+  authStore,
   components: { App },
   template: '<App/>'
 });
