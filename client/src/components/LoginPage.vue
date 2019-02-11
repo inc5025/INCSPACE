@@ -41,9 +41,11 @@ export default {
     },
     Login: function(){
       store.commit('LOGIN', this.data);
+      this.msg("LOGIN");
     },
     Logout: function(){
       store.commit('LOGOUT', this.data);
+      this.msg("LOGOUT");
     },
     Register: function(){
       this.$http.post('/auth/register', this.data)

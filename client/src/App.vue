@@ -11,18 +11,22 @@
               <a v-on:click="setPageNumber(1)" class="white-text">Blog</a>
             </mdb-nav-item>
             <mdb-nav-item href="" class="disabled">Storage</mdb-nav-item>
-            <mdb-nav-item href="" class="disabled">About</mdb-nav-item>
           </mdb-navbar-nav>
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link" disabled>
+              <a class="nav-link">
                 <i class="fa fa-github iicon" aria-hidden="true"></i>
               </a>
             </li>
+            <!--
             <li class="nav-item">
               <a class="nav-link" disabled>
                 <i class="fa fa-facebook-square iicon" aria-hidden="true"></i>
               </a>
+            </li>
+            -->
+            <li class="nav-item">
+              <span class="white">{{isLoggedIn}}</span>
             </li>
           </ul>
         </mdb-navbar-toggler>
@@ -36,6 +40,7 @@
 
 <script>
 import { mdbNavbar, mdbNavItem, mdbNavbarNav, mdbNavbarToggler, mdbNavbarBrand } from 'mdbvue';
+import store from './store';
 
 export default {
   name: 'App',
@@ -46,10 +51,19 @@ export default {
     mdbNavbarToggler,
     mdbNavbarBrand
   },
+  created () {
+    document.title = "devinc.cc";
+  },
   methods: {
     setPageNumber: function(num) {
       this.$store.commit('setPageNumber', num);
       this.$router.push({name : 'PostList'});
+    }
+  },
+  computed:{
+    isLoggedIn(){
+      if(localStorage.accessToken) return "LOGIN";
+      else  return "";
     }
   }
 }
