@@ -42,6 +42,7 @@
 
 <script>
 import marked from 'marked';
+import hljs from 'highlightjs';
 
 export default {
   name: 'PostView',
@@ -54,6 +55,12 @@ export default {
         .catch((e)=>{
           this.$router.push({name : 'NotFound'});
         });
+      marked.setOptions({
+        langPrefix: '',
+        highlight: function(code, lang) {
+          return hljs.highlightAuto(code, [lang]).value
+        }
+      });
   },
   data () {
     return {
@@ -82,25 +89,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.container{
-  text-align: left;
-}
-
-h1, h2 {
-  font-weight: bold;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

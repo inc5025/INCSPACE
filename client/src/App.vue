@@ -62,7 +62,7 @@ export default {
   },
   computed:{
     isLoggedIn(){
-      if(localStorage.accessToken) return "LOGIN";
+      if(store.accessToken) return "LOGIN";
       else  return "";
     }
   }
@@ -74,6 +74,17 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+pre {
+  background-color: #F2F2FF;
+  padding: 0.5rem;
+  
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
 .navbar .dropdown-menu a:hover {
