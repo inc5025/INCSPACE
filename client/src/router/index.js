@@ -6,6 +6,7 @@ import WritePost from '@/components/WritePost'
 import EditPost from '@/components/EditPost'
 import NotFound from '@/components/NotFound'
 import LoginPage from '@/components/LoginPage'
+import Example from '@/components/example'
 import store from '../store'
 
 Vue.use(Router)
@@ -22,6 +23,11 @@ export default new Router({
       path: '/',
       name: 'PostList',
       component: PostList
+    },
+    {
+      path: '/example',
+      name: 'Example',
+      component: Example
     },
     {
       path: '/login',

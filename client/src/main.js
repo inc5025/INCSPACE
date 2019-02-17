@@ -4,7 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import 'bootstrap-css-only/css/bootstrap.min.css'; 
 import 'mdbvue/build/css/mdb.css';
-import 'highlightjs/styles/atom-one-light.css'
+import 'highlightjs/styles/atom-one-dark.css'
 
 import axios from 'axios';
 import { format } from 'date-fns';

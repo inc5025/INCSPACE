@@ -77,7 +77,8 @@ export default {
 }
 
 pre {
-  background-color: #F2F2FF;
+  background-color: #1E1E1E;
+  color: #FFFFFF;
   padding: 0.5rem;
   
   white-space: pre-wrap;       /* css-3 */
