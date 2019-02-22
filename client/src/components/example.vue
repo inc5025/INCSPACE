@@ -9,7 +9,6 @@
     <div class="row" id="preview">
       <div v-html="compiledMarkdown"></div>
     </div>
-
   </section>
 </template>
 

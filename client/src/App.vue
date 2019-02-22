@@ -14,7 +14,7 @@
           </mdb-navbar-nav>
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
-              <a class="nav-link">
+              <a href="https://github.com/inc5025" class="nav-link">
                 <i class="fa fa-github iicon" aria-hidden="true"></i>
               </a>
             </li>
