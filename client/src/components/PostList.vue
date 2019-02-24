@@ -54,15 +54,19 @@
 <script>
 export default {
   name: 'PostList',
-    created(){
-      this.$http.get('/post')
-      .then((res)=>{
-          this.posts = res.data.reverse();
-          this.loading = true;
-      })
-      .catch((e)=>{
-        console.log(e);
-      });
+  created(){
+    this.$http.get('/post')
+    .then((res)=>{
+        this.posts = res.data.reverse();
+        this.loading = true;
+    })
+    .catch((e)=>{
+      console.log(e);
+    });
+  },
+  mounted(){
+    console.info('App this router:', this.$router);
+    console.info('App currentRoute:', this.$router.currentRoute);
   },
   data () {
     return {
@@ -87,12 +91,10 @@ export default {
       },
       nextPage(){
         window.scrollTo(0,0);
-        //this.pageNumber++;
         this.$store.commit('setPageNumber', this.pageNumber + 1);
       },
       prevPage(){
         window.scrollTo(0,0);
-        //this.pageNumber--;
         this.$store.commit('setPageNumber', this.pageNumber - 1);
       }
     },

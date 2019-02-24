@@ -2,16 +2,31 @@
   <div id="app">
     <div class="container">
       <mdb-navbar dark class="indigo">
-        <mdb-navbar-brand class="title h1 white-text">
+        <mdb-navbar-brand class="title h1">
           <a v-on:click="setPageNumber(1)" class="white-text">devinc.cc</a>
         </mdb-navbar-brand>
         <mdb-navbar-toggler>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a v-on:click="setPageNumber(1)" class="nav-link white-text">
+                Blog
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link white-text disabled">
+                Storage
+              </a>
+            </li>
+          </ul>
+          <!--
           <mdb-navbar-nav>
-            <mdb-nav-item>
-              <a v-on:click="setPageNumber(1)" class="white-text">Blog</a>
+            
+            <mdb-nav-item href="#">
+              <span v-on:click="setPageNumber(1)" class="white-text">Blog</span>
             </mdb-nav-item>
-            <mdb-nav-item href="" class="disabled">Storage</mdb-nav-item>
+            <mdb-nav-item class="disabled">Storage</mdb-nav-item>
           </mdb-navbar-nav>
+          -->
           <ul class="navbar-nav nav-flex-icons">
             <li class="nav-item">
               <a href="https://github.com/inc5025" class="nav-link">
@@ -39,15 +54,13 @@
 </template>
 
 <script>
-import { mdbNavbar, mdbNavItem, mdbNavbarNav, mdbNavbarToggler, mdbNavbarBrand } from 'mdbvue';
+import { mdbNavbar, mdbNavbarToggler, mdbNavbarBrand } from 'mdbvue';
 import store from './store';
 
 export default {
   name: 'App',
     components: {
     mdbNavbar,
-    mdbNavItem,
-    mdbNavbarNav,
     mdbNavbarToggler,
     mdbNavbarBrand
   },
@@ -57,6 +70,11 @@ export default {
   methods: {
     setPageNumber: function(num) {
       this.$store.commit('setPageNumber', num);
+      if(this.$router.currentRoute.name == 'PostList'){
+        console.info(this.$router.currentRoute.name);
+        return;
+      }
+        
       this.$router.push({name : 'PostList'});
     }
   },
